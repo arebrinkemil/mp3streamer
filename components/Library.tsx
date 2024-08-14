@@ -1,10 +1,33 @@
-"use client";
+'use client';
 
-import { TbPlaylist } from "react-icons/tb";
-import { AiOutlinePlus } from "react-icons/ai";
+import { TbPlaylist } from 'react-icons/tb';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { useSubscribeModal } from '@/hooks/useSubscribeModal';
+import { useUploadModal } from '@/hooks/useUploadModal';
+import { useOnPlay } from '@/hooks/useOnPlay';
+import { useAuthModal } from '@/hooks/useAuthModal';
+import { useUser } from '@/hooks/useUser';
+import { MediaItem } from './MediaItem';
+import { Song } from '@/types';
 
-const Library = () => {
-  const onClick = () => {};
+interface LibraryProps {
+  songs: Song[];
+}
+
+export const Library: React.FC<LibraryProps> = ({ songs }) => {
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { user, subscription } = useUser();
+
+  const onPlay = useOnPlay(songs);
+
+  const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    return uploadModal.onOpen();
+  };
 
   return (
     <div className="flex flex-col">
@@ -19,9 +42,11 @@ const Library = () => {
           className="text-neutral-400 cursor-pointer hover:text-white transition"
         />
       </div>
-      <div className="flex flex-col gap-y-2 mt-4 px-3"> List of Songs</div>
+      <div className="flex flex-col gap-y-2 mt-4 px-3">
+        {songs.map((item) => (
+          <MediaItem onClick={(id: string) => onPlay(id)} key={item.id} data={item} />
+        ))}
+      </div>
     </div>
   );
 };
-
-export default Library;

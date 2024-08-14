@@ -1,5 +1,5 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { IoMdClose } from "react-icons/io";
+import * as Dialog from '@radix-ui/react-dialog';
+import { IoMdClose } from 'react-icons/io';
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,13 +9,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onChange,
-  title,
-  description,
-  children,
-}) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, description, children }) => {
   return (
     <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
       <Dialog.DialogPortal>
