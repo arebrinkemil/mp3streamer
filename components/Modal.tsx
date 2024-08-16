@@ -1,4 +1,14 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+  DialogOverlay,
+  DialogPortal,
+} from '@/components/ui/dialog';
 import { IoMdClose } from 'react-icons/io';
 
 interface ModalProps {
@@ -11,9 +21,9 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, description, children }) => {
   return (
-    <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
-      <Dialog.DialogPortal>
-        <Dialog.Overlay
+    <Dialog open={isOpen} onOpenChange={onChange}>
+      <DialogPortal>
+        <DialogOverlay
           className="
                 bg-neutral-900/90
                 backdrop-blur-sm
@@ -21,7 +31,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
                 inset-0
                 "
         />
-        <Dialog.Content
+        <DialogContent
           className="
                 fixed
                 drop-shadow-md
@@ -44,28 +54,30 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
                 focus:outline-none
                 "
         >
-          <Dialog.Title
-            className="
+          <DialogHeader>
+            <DialogTitle
+              className="
                     text-xl
                     text-center
                     font-bold
                     mb-4
                     "
-          >
-            {title}
-          </Dialog.Title>
-          <Dialog.Description
-            className="
+            >
+              {title}
+            </DialogTitle>
+            <DialogDescription
+              className="
                     mb-5 
                     text-sm
                     leading-normal
                     text-center
                     "
-          >
-            {description}
-          </Dialog.Description>
+            >
+              {description}
+            </DialogDescription>
+          </DialogHeader>
           <div>{children}</div>
-          <Dialog.Close asChild>
+          <DialogClose asChild>
             <button
               className="
                         text-neutral-400
@@ -76,7 +88,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
                         inline-flex
                         h-[25px]
                         w-[25px]
-                        apperance-none
+                        appearance-none
                         items-center
                         justify-center
                         rounded-full
@@ -85,9 +97,9 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
             >
               <IoMdClose />
             </button>
-          </Dialog.Close>
-        </Dialog.Content>
-      </Dialog.DialogPortal>
-    </Dialog.Root>
+          </DialogClose>
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
   );
 };
