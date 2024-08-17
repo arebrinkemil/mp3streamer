@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ children, className }) => {
     <div
       className={twMerge(
         `
-        h-fit 
+        h-[90px] 
         w-full
        
         px-6

@@ -13,18 +13,30 @@ export const Player = () => {
   const songUrl = useLoadSongUrl(song!);
 
   if (!song || !songUrl || !player.activeId) {
-    return null;
+    return (
+      <div
+        className="
+          
+          
+          w-full
+          
+          h-[90px]
+          px-4
+          "
+      >
+        {}
+      </div>
+    );
   }
 
   return (
     <div
       className="
-        fixed
-        bottom-0
-        bg-black
+       
+       
         w-full
-        py-2
-        h-[80px]
+        
+        h-[90px]
         px-4
         "
     >

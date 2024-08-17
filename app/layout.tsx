@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <UserProvider>
             <ModalProvider products={products} />
             <Sidebar songs={userSongs}>{children}</Sidebar>
-            <Player />
+            {/* <Player /> */}
           </UserProvider>
         </SupabaseProvider>
       </body>
