@@ -10,6 +10,9 @@ interface MusicInfoProps {
 
 export const MusicInfo: React.FC<MusicInfoProps> = ({ song, songUrl }) => {
   const imageUrl = useLoadImage(song);
+  let playTime = song.length / 60;
+  playTime = Math.round(playTime * 100) / 100;
+
   return (
     <div className=" px-4">
       <div className="w-1/3">
@@ -23,6 +26,10 @@ export const MusicInfo: React.FC<MusicInfoProps> = ({ song, songUrl }) => {
       </div>
       <h2>{song.title}</h2>
       <p>{song.author}</p>
+      <p>{song.album}</p>
+      <p>{song.genre}</p>
+      <p>{playTime}</p>
+      <p>{song.year}</p>
     </div>
   );
 };

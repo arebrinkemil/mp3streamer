@@ -24,6 +24,10 @@ export const UploadModal = () => {
     defaultValues: {
       author: '',
       title: '',
+      album: '',
+      genre: '',
+      length: 0,
+      year: 0,
       song: null,
       image: null,
     },
@@ -41,17 +45,24 @@ export const UploadModal = () => {
     if (file) {
       try {
         const arrayBuffer = await file.arrayBuffer();
-        const uint8Array = new Uint8Array(arrayBuffer); // Convert ArrayBuffer to Uint8Array
+        const uint8Array = new Uint8Array(arrayBuffer);
         const metadata = await parseBuffer(uint8Array, 'audio/mpeg');
-        const { title, artist } = metadata.common;
 
-        if (title) {
-          setValue('title', title);
-        }
+        console.log(metadata);
 
-        if (artist) {
-          setValue('author', artist);
-        }
+        const title = metadata.common.title || '';
+        const author = metadata.common.artist || '';
+        const album = metadata.common.album || '';
+        const genre = metadata.common.genre ? metadata.common.genre.join(', ') : '';
+        const length = metadata.format.duration || 0;
+        const year = metadata.common.year || 0;
+
+        setValue('title', title);
+        setValue('author', author);
+        setValue('album', album);
+        setValue('genre', genre);
+        setValue('length', length);
+        setValue('year', year);
       } catch (error) {
         toast.error('Failed to extract metadata from the song file.');
       }
@@ -100,6 +111,10 @@ export const UploadModal = () => {
         user_id: user.id,
         title: values.title,
         author: values.author,
+        album: values.album,
+        genre: values.genre,
+        length: values.length,
+        year: values.year,
         image_path: imageData.path,
         song_path: songData.path,
       });
@@ -141,6 +156,31 @@ export const UploadModal = () => {
           {...register('author', { required: true })}
           placeholder="Song author"
         />
+        <Input
+          id="album"
+          disabled={isLoading}
+          {...register('album', { required: false })}
+          placeholder="Song album"
+        />
+        <Input
+          id="genre"
+          disabled={isLoading}
+          {...register('genre', { required: false })}
+          placeholder="Song genre"
+        />
+        <Input
+          id="length"
+          disabled={isLoading}
+          {...register('length', { required: false })}
+          placeholder="Song length"
+        />
+        <Input
+          id="year"
+          disabled={isLoading}
+          {...register('year', { required: false })}
+          placeholder="Song year"
+        />
+
         <div>
           <div className="pb-1">Select a song file</div>
           <Input

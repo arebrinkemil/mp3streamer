@@ -7,6 +7,12 @@ export interface Song {
   title: string;
   song_path: string;
   image_path: string;
+  album: string;
+  genre: string;
+  length: number;
+  year: number;
+  //bitrate: number;
+  //BPM: number;
 }
 
 export interface UserDetails {
