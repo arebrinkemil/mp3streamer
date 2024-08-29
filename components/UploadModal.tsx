@@ -1,19 +1,17 @@
 'use client';
 
 import uniqid from 'uniqid';
-
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
-
 import { useUploadModal } from '@/hooks/useUploadModal';
 import { useUser } from '@/hooks/useUser';
-
 import { Modal } from './Modal';
 import { Input } from './Input';
 import { Button } from './Button';
+import { parseBuffer } from 'music-metadata';
 
 export const UploadModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +20,7 @@ export const UploadModal = () => {
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
 
-  const { register, handleSubmit, reset } = useForm<FieldValues>({
+  const { register, handleSubmit, reset, setValue } = useForm<FieldValues>({
     defaultValues: {
       author: '',
       title: '',
@@ -35,6 +33,28 @@ export const UploadModal = () => {
     if (!open) {
       reset();
       uploadModal.onClose();
+    }
+  };
+
+  const handleSongFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const uint8Array = new Uint8Array(arrayBuffer); // Convert ArrayBuffer to Uint8Array
+        const metadata = await parseBuffer(uint8Array, 'audio/mpeg');
+        const { title, artist } = metadata.common;
+
+        if (title) {
+          setValue('title', title);
+        }
+
+        if (artist) {
+          setValue('author', artist);
+        }
+      } catch (error) {
+        toast.error('Failed to extract metadata from the song file.');
+      }
     }
   };
 
@@ -104,7 +124,7 @@ export const UploadModal = () => {
   return (
     <Modal
       title="Add a song"
-      description="Upload a mp3 file"
+      description="Upload an mp3 file"
       isOpen={uploadModal.isOpen}
       onChange={onChange}
     >
@@ -129,6 +149,7 @@ export const UploadModal = () => {
             disabled={isLoading}
             accept=".mp3"
             {...register('song', { required: true })}
+            onChange={handleSongFileChange}
           />
         </div>
         <div>
