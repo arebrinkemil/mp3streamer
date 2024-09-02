@@ -39,7 +39,7 @@ export const MusicContentPanel = () => {
         w-full
         
         h-[90px]
-        px-4
+        
         "
     >
       {}
