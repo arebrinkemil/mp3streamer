@@ -181,6 +181,69 @@ export interface Database {
           }
         ];
       };
+      playlists: {
+        Row: {
+          id?: number;
+          created_at?: string | null;
+          image_path?: string | null;
+          name?: string | null;
+          user_id?: string | null;
+          description?: string | null;
+        };
+        Insert: {
+          id?: number;
+          created_at?: string | null;
+          image_path?: string | null;
+          name?: string | null;
+          user_id?: string | null;
+          description?: string | null;
+        };
+        Update: {
+          id?: number;
+          created_at?: string | null;
+          image_path?: string | null;
+          name?: string | null;
+          user_id?: string | null;
+          description?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'playlists_user_id_fkey';
+            columns: ['user_id'];
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+
+      playlist_songs: {
+        Row: {
+          playlist_id: number;
+          song_id: number;
+        };
+        Insert: {
+          playlist_id: number;
+          song_id: number;
+        };
+        Update: {
+          playlist_id?: number;
+          song_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'playlist_songs_playlist_id_fkey';
+            columns: ['playlist_id'];
+            referencedRelation: 'playlists';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'playlist_songs_song_id_fkey';
+            columns: ['song_id'];
+            referencedRelation: 'songs';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       subscriptions: {
         Row: {
           cancel_at: string | null;

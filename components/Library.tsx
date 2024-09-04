@@ -3,6 +3,7 @@
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { useSubscribeModal } from '@/hooks/useSubscribeModal';
+import { usePlaylistModal } from '@/hooks/usePlaylistModal';
 import { useUploadModal } from '@/hooks/useUploadModal';
 import { useOnPlay } from '@/hooks/useOnPlay';
 import { useAuthModal } from '@/hooks/useAuthModal';
@@ -17,6 +18,7 @@ interface LibraryProps {
 export const Library: React.FC<LibraryProps> = ({ songs }) => {
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
+  const playlistModal = usePlaylistModal();
   const { user, subscription } = useUser();
 
   const onPlay = useOnPlay(songs);
@@ -29,6 +31,14 @@ export const Library: React.FC<LibraryProps> = ({ songs }) => {
     return uploadModal.onOpen();
   };
 
+  const createPlaylist = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+
+    return playlistModal.onOpen();
+  };
+
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between px-5 pt-4">
@@ -38,6 +48,17 @@ export const Library: React.FC<LibraryProps> = ({ songs }) => {
         </div>
         <AiOutlinePlus
           onClick={onClick}
+          size={20}
+          className="text-neutral-400 cursor-pointer hover:text-white transition"
+        />
+      </div>
+      <div className="flex items-center justify-between px-5 pt-4">
+        <div className="inline-flex items-center gap-x-2">
+          <TbPlaylist className="text-neutral-400" size={26} />
+          <p className="text-neutral-400 font-medium text-md">Create Playlist</p>
+        </div>
+        <AiOutlinePlus
+          onClick={createPlaylist}
           size={20}
           className="text-neutral-400 cursor-pointer hover:text-white transition"
         />
