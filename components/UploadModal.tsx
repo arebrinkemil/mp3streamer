@@ -1,19 +1,17 @@
 'use client';
 
 import uniqid from 'uniqid';
-
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
-
 import { useUploadModal } from '@/hooks/useUploadModal';
 import { useUser } from '@/hooks/useUser';
-
 import { Modal } from './Modal';
 import { Input } from './Input';
 import { Button } from './Button';
+import { parseBuffer } from 'music-metadata';
 
 export const UploadModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,10 +20,14 @@ export const UploadModal = () => {
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
 
-  const { register, handleSubmit, reset } = useForm<FieldValues>({
+  const { register, handleSubmit, reset, setValue } = useForm<FieldValues>({
     defaultValues: {
       author: '',
       title: '',
+      album: '',
+      genre: '',
+      length: 0,
+      year: 0,
       song: null,
       image: null,
     },
@@ -35,6 +37,35 @@ export const UploadModal = () => {
     if (!open) {
       reset();
       uploadModal.onClose();
+    }
+  };
+
+  const handleSongFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const uint8Array = new Uint8Array(arrayBuffer);
+        const metadata = await parseBuffer(uint8Array, 'audio/mpeg');
+
+        console.log(metadata);
+
+        const title = metadata.common.title || '';
+        const author = metadata.common.artist || '';
+        const album = metadata.common.album || '';
+        const genre = metadata.common.genre ? metadata.common.genre.join(', ') : '';
+        const length = metadata.format.duration || 0;
+        const year = metadata.common.year || 0;
+
+        setValue('title', title);
+        setValue('author', author);
+        setValue('album', album);
+        setValue('genre', genre);
+        setValue('length', length);
+        setValue('year', year);
+      } catch (error) {
+        toast.error('Failed to extract metadata from the song file.');
+      }
     }
   };
 
@@ -80,6 +111,10 @@ export const UploadModal = () => {
         user_id: user.id,
         title: values.title,
         author: values.author,
+        album: values.album,
+        genre: values.genre,
+        length: values.length,
+        year: values.year,
         image_path: imageData.path,
         song_path: songData.path,
       });
@@ -104,7 +139,7 @@ export const UploadModal = () => {
   return (
     <Modal
       title="Add a song"
-      description="Upload a mp3 file"
+      description="Upload an mp3 file"
       isOpen={uploadModal.isOpen}
       onChange={onChange}
     >
@@ -121,6 +156,31 @@ export const UploadModal = () => {
           {...register('author', { required: true })}
           placeholder="Song author"
         />
+        <Input
+          id="album"
+          disabled={isLoading}
+          {...register('album', { required: false })}
+          placeholder="Song album"
+        />
+        <Input
+          id="genre"
+          disabled={isLoading}
+          {...register('genre', { required: false })}
+          placeholder="Song genre"
+        />
+        <Input
+          id="length"
+          disabled={isLoading}
+          {...register('length', { required: false })}
+          placeholder="Song length"
+        />
+        <Input
+          id="year"
+          disabled={isLoading}
+          {...register('year', { required: false })}
+          placeholder="Song year"
+        />
+
         <div>
           <div className="pb-1">Select a song file</div>
           <Input
@@ -129,6 +189,7 @@ export const UploadModal = () => {
             disabled={isLoading}
             accept=".mp3"
             {...register('song', { required: true })}
+            onChange={handleSongFileChange}
           />
         </div>
         <div>

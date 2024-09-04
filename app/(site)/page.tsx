@@ -2,6 +2,7 @@ import { getSongs } from '@/actions/getSongs';
 import { Header } from '@/components/Header';
 import { ListItem } from '@/components/ListItem';
 import { PageContent } from './components/PageContent';
+import { MusicContent } from './components/MusicContent';
 import { Player } from '@/components/Player';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -64,7 +65,7 @@ export default async function Home() {
           </AccordionTrigger>
           <AccordionContent className="pb-0 bg-[#eeeeee] rounded-lg">
             <div className="h-[calc(100vh-(366px+1rem))]">
-              <PageContent songs={songs} />
+              <MusicContent songs={songs} />
             </div>
           </AccordionContent>
         </AccordionItem>

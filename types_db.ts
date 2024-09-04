@@ -141,6 +141,10 @@ export interface Database {
           song_path: string | null;
           title: string | null;
           user_id: string | null;
+          album: string | null;
+          genre: string | null;
+          length: number | null;
+          year: number | null;
         };
         Insert: {
           author?: string | null;
@@ -150,6 +154,10 @@ export interface Database {
           song_path?: string | null;
           title?: string | null;
           user_id?: string | null;
+          album?: string | null;
+          genre?: string | null;
+          length?: number | null;
+          year?: number | null;
         };
         Update: {
           author?: string | null;
@@ -159,6 +167,10 @@ export interface Database {
           song_path?: string | null;
           title?: string | null;
           user_id?: string | null;
+          album?: string | null;
+          genre?: string | null;
+          length?: number | null;
+          year?: number | null;
         };
         Relationships: [
           {
