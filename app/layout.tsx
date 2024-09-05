@@ -7,6 +7,7 @@ import { Figtree } from 'next/font/google';
 import { SupabaseProvider } from '@/providers/SupabaseProvider';
 import { UserProvider } from '@/providers/UserProvider';
 import { ToasterProvider } from '@/providers/ToasterProvider';
+import { ModalProvider } from '@/providers/ModalProvider';
 
 import { getSongsByUserId } from '@/actions/getSongsByUserId';
 import { Player } from '@/components/Player';
@@ -35,6 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
+            <ModalProvider />
             <Sidebar songs={userSongs}>{children}</Sidebar>
             {/* <Player /> */}
           </UserProvider>
