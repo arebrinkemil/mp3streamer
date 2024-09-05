@@ -1,6 +1,6 @@
 import { User } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext, useUser as useSupaUser } from '@supabase/auth-helpers-react';
-import { UserDetails, Subscription } from '@/types';
+import { UserDetails } from '@/types';
 import { useState, createContext, useEffect, useContext } from 'react';
 
 //* Define a type for the user context
@@ -9,7 +9,6 @@ type UserContextType = {
   user: User | null;
   userDetails: UserDetails | null;
   isLoading: boolean;
-  subscription: Subscription | null;
 };
 
 //* Create a user context with the above type
@@ -34,49 +33,38 @@ export const MyUserContextProvider = (props: Props) => {
   //* Create a state for loading data, user details, and subscription
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  // const [subscription, setSubscription] = useState<Subscription | null>(null);
 
   //* Define functions to get user details and subscription from Supabase
   const getUserDetails = () => supabase.from('users').select('*').single();
-  const getSubscription = () =>
-    supabase
-      .from('subscriptions')
-      .select('*, prices(*, products(*))')
-      .in('status', ['trialing', 'active'])
-      .single();
+  // const getSubscription = () =>
+  //   supabase
+  //     .from('subscriptions')
+  //     .select('*, prices(*, products(*))')
+  //     .in('status', ['trialing', 'active'])
+  //     .single();
 
   //* Fetch user info
   useEffect(() => {
     //* If user exists and data is not loading, fetch data
-    if (user && !isLoadingData && !userDetails && !subscription) {
+    if (user && !isLoadingData && !userDetails) {
       setIsLoadingData(true);
 
       //* Use Promise.allSettled to fetch user details and subscription
-      Promise.allSettled([getUserDetails(), getSubscription()]).then(
-        ([userDetailsPromise, subscriptionPromise]) => {
-          //* If the user details promise is fulfilled, set the user details state
-          if (userDetailsPromise.status === 'fulfilled') {
-            setUserDetails(userDetailsPromise.value?.data as UserDetails);
-          } else {
-            //! Log an error if the promise for details is rejected
-            console.error(userDetailsPromise.reason);
-          }
-
-          //* If the subscription promise is fulfilled, set the subscription state
-          if (subscriptionPromise.status === 'fulfilled') {
-            setSubscription(subscriptionPromise.value?.data as Subscription);
-          } else {
-            //! Log an error if the promise for subscriptions is rejected
-            console.error(subscriptionPromise.reason);
-          }
-
-          setIsLoadingData(false);
+      Promise.allSettled([getUserDetails()]).then(([userDetailsPromise]) => {
+        //* If the user details promise is fulfilled, set the user details state
+        if (userDetailsPromise.status === 'fulfilled') {
+          setUserDetails(userDetailsPromise.value?.data as UserDetails);
+        } else {
+          //! Log an error if the promise for details is rejected
+          console.error(userDetailsPromise.reason);
         }
-      );
+
+        setIsLoadingData(false);
+      });
     } else if (!user && !isLoadingUser && !isLoadingData) {
       //* If user does not exist and data is not loading, reset user details and subscription
       setUserDetails(null);
-      setSubscription(null);
     }
   }, [user, isLoadingUser]); //* Run effect when user or loading user state changes
 
@@ -86,7 +74,6 @@ export const MyUserContextProvider = (props: Props) => {
     user,
     userDetails,
     isLoading: isLoadingUser || isLoadingData,
-    subscription,
   };
 
   return <UserContext.Provider value={value} {...props} />;

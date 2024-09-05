@@ -6,7 +6,7 @@ import { useUser } from './useUser';
 export const useOnPlay = (songs: Song[]) => {
   const player = usePlayer();
   const authModal = useAuthModal();
-  const { user, subscription } = useUser();
+  const { user } = useUser();
 
   const usePlay = (id: string) => {
     if (!user) {
