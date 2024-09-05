@@ -14,14 +14,15 @@ import { Box } from './Box';
 import { SidebarItem } from './SidebarItem';
 import { Library } from './Library';
 
-import { Song } from '@/types';
+import { Song, Playlists } from '@/types';
 
 interface SidebarProps {
   children: React.ReactNode;
   songs: Song[];
+  playlists: Playlists[];
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlists }) => {
   const pathname = usePathname();
 
   const player = usePlayer();
@@ -63,7 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
           </div>
         </Box>
         <Box className="overflow-y-auto h-full">
-          <Library songs={songs} />
+          <Library songs={songs} playlists={playlists} />
         </Box>
       </div>
       <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>

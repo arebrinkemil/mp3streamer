@@ -8,8 +8,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { useSupabaseClient } from '@supabase/auth-helpers-react'; // Import Supabase client
-import { useUser } from '@/hooks/useUser'; // Hook to get the current user
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useUser } from '@/hooks/useUser';
 import { toast } from 'react-hot-toast';
 
 interface Playlist {
@@ -23,24 +23,23 @@ interface AddToPlaylistProps {
 
 export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
   const supabaseClient = useSupabaseClient();
-  const { user } = useUser(); // Get the current user
-  const [playlists, setPlaylists] = useState<Playlist[]>([]); // State to hold playlists
-  const [loading, setLoading] = useState<boolean>(false); // State for loading indicator
+  const { user } = useUser();
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Function to fetch playlists from Supabase
   const fetchPlaylists = async () => {
     try {
       setLoading(true);
       const { data, error } = await supabaseClient
-        .from('playlists') // Assuming your table is named 'playlists'
+        .from('playlists')
         .select('*')
-        .eq('user_id', user?.id); // Fetch playlists where the user_id matches the current user
+        .eq('user_id', user?.id);
 
       if (error) {
         throw error;
       }
 
-      setPlaylists(data || []); // Set playlists state
+      setPlaylists(data || []);
     } catch (error) {
       toast.error('Error fetching playlists');
     } finally {
@@ -48,7 +47,23 @@ export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
     }
   };
 
-  // Fetch playlists when the sheet opens
+  const handleAddToPlaylist = async (playlistId: string) => {
+    try {
+      const { error } = await supabaseClient.from('playlist_songs').insert({
+        playlist_id: playlistId,
+        song_id: songId,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast.success('Song added to playlist!');
+    } catch (error) {
+      toast.error('Error adding song to playlist');
+    }
+  };
+
   useEffect(() => {
     if (user) {
       fetchPlaylists();
@@ -63,7 +78,6 @@ export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
             className="text-neutral-400 cursor-pointer hover:text-white transition"
             size={24}
           />{' '}
-          {/* Playlist icon */}
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
@@ -72,11 +86,11 @@ export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
           </SheetHeader>
 
           {loading ? (
-            <p>Loading...</p> // Show loading state
+            <p>Loading...</p>
           ) : (
             <div className="flex flex-col gap-y-2">
               {playlists.length === 0 ? (
-                <p>No playlists found.</p> // Show this if no playlists are found
+                <p>No playlists found.</p>
               ) : (
                 playlists.map((playlist) => (
                   <button
@@ -94,24 +108,4 @@ export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
       </Sheet>
     </>
   );
-
-  // Function to handle adding the song to a playlist
-  const handleAddToPlaylist = async (playlistId: string) => {
-    try {
-      const { error } = await supabaseClient
-        .from('playlist_songs') // Assuming you have a join table 'playlist_songs'
-        .insert({
-          playlist_id: playlistId,
-          song_id: songId,
-        });
-
-      if (error) {
-        throw error;
-      }
-
-      toast.success('Song added to playlist!');
-    } catch (error) {
-      toast.error('Error adding song to playlist');
-    }
-  };
 };
