@@ -70,25 +70,25 @@ export const Header: React.FC<HeaderProps> = ({ children, className }) => {
             onClick={() => router.back()}
             className=" bg-black flex items-center justify-center hover:opacity-75 transition"
           >
-            <RxCaretLeft className="text-white" size={35} />
+            <RxCaretLeft className="text-[#EFEFEF]" size={35} />
           </button>
           <button
             onClick={() => router.forward()}
             className=" bg-black flex items-center justify-center hover:opacity-75 transition"
           >
-            <RxCaretRight className="text-white" size={35} />
+            <RxCaretRight className="text-[#EFEFEF]" size={35} />
           </button>
         </div>
         <div className="flex md:hidden gap-x-2 items-center">
           <button
             onClick={() => router.push('/')}
-            className=" p-2 bg-white flex items-center justify-center hover:opacity-75 transition"
+            className=" p-2 bg-[#EFEFEF] flex items-center justify-center hover:opacity-75 transition"
           >
             <HiHome className="text-black" size={20} />
           </button>
           <button
             onClick={() => router.push('/search')}
-            className=" p-2 bg-white flex items-center justify-center hover:opacity-75 transition"
+            className=" p-2 bg-[#EFEFEF] flex items-center justify-center hover:opacity-75 transition"
           >
             <BiSearch className="text-black" size={20} />
           </button>
@@ -102,10 +102,10 @@ export const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     items-center
                     "
             >
-              <Button onClick={handleLogout} className="bg-white px-6 py-2">
+              <Button onClick={handleLogout} className="bg-[#EFEFEF] px-6 py-2">
                 Logout
               </Button>
-              <Button onClick={() => router.push('/account')} className="bg-white">
+              <Button onClick={() => router.push('/account')} className="bg-[#EFEFEF]">
                 <FaUserAlt />
               </Button>
             </div>
@@ -120,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 </Button>
               </div>
               <div>
-                <Button onClick={authModal.onOpen} className="bg-white px-6 py-2">
+                <Button onClick={authModal.onOpen} className="bg-[#EFEFEF] px-6 py-2">
                   Log in
                 </Button>
               </div>

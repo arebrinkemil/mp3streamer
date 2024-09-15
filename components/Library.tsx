@@ -56,7 +56,7 @@ export const Library: React.FC<LibraryProps> = ({ songs, playlists }) => {
         <AiOutlinePlus
           onClick={onClick}
           size={20}
-          className="text-neutral-400 cursor-pointer hover:text-white transition"
+          className="text-neutral-400 cursor-pointer hover:text-[#EFEFEF] transition"
         />
       </div>
       <div className="flex items-center justify-between px-5 pt-4">
@@ -67,7 +67,7 @@ export const Library: React.FC<LibraryProps> = ({ songs, playlists }) => {
         <AiOutlinePlus
           onClick={createPlaylist}
           size={20}
-          className="text-neutral-400 cursor-pointer hover:text-white transition"
+          className="text-neutral-400 cursor-pointer hover:text-[#EFEFEF] transition"
         />
       </div>
       <div className="flex flex-col gap-y-2 mt-4 px-3">
@@ -78,9 +78,9 @@ export const Library: React.FC<LibraryProps> = ({ songs, playlists }) => {
           <div
             key={playlist.id}
             onClick={() => handlePlaylistClick(playlist.id)}
-            className="cursor-pointer hover:text-white transition"
+            className="cursor-pointer hover:text-[#EFEFEF] transition"
           >
-            <p className="text-white">{playlist.name}</p>
+            <p className="text-[#EFEFEF]">{playlist.name}</p>
           </div>
         ))}
       </div>

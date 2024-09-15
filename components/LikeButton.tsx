@@ -89,7 +89,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ songId }) => {
         transition
         "
     >
-      <Icon color={isLiked ? '#1DB954' : 'white'} size={25} />
+      <Icon color={isLiked ? '#1DB954' : '[#EFEFEF]'} size={25} />
     </button>
   );
 };

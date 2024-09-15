@@ -24,12 +24,12 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({ icon: Icon, label, act
         text-md
         font-medium
         cursor-pointer
-        hover:text-white
+        hover:text-[#EFEFEF]
         transition
         text-neutral-400
         py-1
         `,
-        active && 'text-white'
+        active && 'text-[#EFEFEF]'
       )}
     >
       <Icon size={26} />

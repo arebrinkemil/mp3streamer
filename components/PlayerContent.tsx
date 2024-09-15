@@ -142,7 +142,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
                 items-center
                 justify-center
                 
-                bg-white
+                bg-[#EFEFEF]
                 p-1
                 cursor-pointer
                 "
@@ -169,7 +169,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
           className="
                 text-neutral-400
                 cursor-pointer
-                hover:text-white
+                hover:text-[#EFEFEF]
                 transistion
                 "
         />
@@ -182,7 +182,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
                 h-10
                 w-10
                 
-                bg-white
+                bg-[#EFEFEF]
                 p-1
                 cursor-pointer
                 "
@@ -195,7 +195,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
           className="
                 text-neutral-400
                 cursor-pointer
-                hover:text-white
+                hover:text-[#EFEFEF]
                 transition
                 "
         />

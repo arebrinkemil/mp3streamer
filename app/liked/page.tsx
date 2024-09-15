@@ -54,7 +54,7 @@ const Liked = async () => {
               <p className="hidden md:block font-semibold text-sm">Playlist</p>
               <h1
                 className="
-                            text-white
+                            text-[#EFEFEF]
                             text-4xl
                             sm:text-5xl
                             lg:text-7xl

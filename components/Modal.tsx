@@ -81,7 +81,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
             <button
               className="
                         text-neutral-400
-                        hover:text-white
+                        hover:text-[#EFEFEF]
                         absolute
                         top-[10px]
                         right-[10px]

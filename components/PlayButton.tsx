@@ -9,7 +9,7 @@ export const PlayButton = () => {
          
         flex 
         items-center
-      bg-green-500 
+      bg-[#EFEFEF]
         p-4
         drop-shadow-md
         translate 

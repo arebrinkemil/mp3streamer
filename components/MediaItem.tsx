@@ -61,7 +61,7 @@ export const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
             overflow-hidden
             "
       >
-        <p className="text-white truncate">{data.title}</p>
+        <p className="text-[#EFEFEF] truncate">{data.title}</p>
         <p className="text-neutral-400 text-sm truncate">{data.author}</p>
       </div>
     </div>
