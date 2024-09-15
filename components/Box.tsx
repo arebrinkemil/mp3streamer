@@ -11,7 +11,7 @@ export const Box: React.FC<BoxProps> = ({ children, className }) => {
       className={twMerge(
         `
         bg-neutral-900
-        rounded-lg
+        
         h-fit
         w-full
         `,

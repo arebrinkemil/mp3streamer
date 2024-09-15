@@ -41,7 +41,7 @@ export const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
             aspect-square
             w-full
             h-full
-            rounded-md
+            
             overflow-hidden
             "
       >

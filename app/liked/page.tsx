@@ -12,8 +12,8 @@ const Liked = async () => {
   return (
     <div
       className="
-        bg-neutral-900
-        rounded-lg
+        bg-[#EFEFEF]
+        
         h-full
         w-full
         overflow-hidden

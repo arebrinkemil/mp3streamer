@@ -48,7 +48,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
                 md:max-w-[450px]
                 translate-x-[-50%]
                 translate-y-[-50%]
-                rounded-md
+                
                 bg-neutral-800
                 p-[25px]
                 focus:outline-none
@@ -91,7 +91,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onChange, title, descripti
                         appearance-none
                         items-center
                         justify-center
-                        rounded-full
+                        
                         focus:outline-none
                         "
             >

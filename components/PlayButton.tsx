@@ -6,7 +6,7 @@ export const PlayButton = () => {
       className="
         transition 
         opacity-0 
-        rounded-full 
+         
         flex 
         items-center
       bg-green-500 

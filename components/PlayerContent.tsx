@@ -139,7 +139,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
                 flex
                 items-center
                 justify-center
-                rounded-full
+                
                 bg-white
                 p-1
                 cursor-pointer
@@ -179,7 +179,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
                 justify-center
                 h-10
                 w-10
-                rounded-full
+                
                 bg-white
                 p-1
                 cursor-pointer
