@@ -12,6 +12,7 @@ import { HiSpeakerXMark, HiSpeakerWave } from 'react-icons/hi2';
 
 import { MediaItem } from './MediaItem';
 import { LikeButton } from './LikeButton';
+import { AddToPlaylist } from './AddToPlaylist';
 import { Slider } from './Slider';
 import useSound from 'use-sound';
 
@@ -117,6 +118,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
         >
           <MediaItem data={song} />
           <LikeButton songId={song.id} />
+          <AddToPlaylist songId={song.id} />
         </div>
       </div>
 

@@ -2,19 +2,22 @@
 
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useRouter } from 'next/navigation'; // Import Next.js's useRouter
 import { usePlaylistModal } from '@/hooks/usePlaylistModal';
 import { useUploadModal } from '@/hooks/useUploadModal';
 import { useOnPlay } from '@/hooks/useOnPlay';
 import { useAuthModal } from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
 import { MediaItem } from './MediaItem';
-import { Song } from '@/types';
+import { Song, Playlists } from '@/types';
 
 interface LibraryProps {
   songs: Song[];
+  playlists: Playlists[];
 }
 
-export const Library: React.FC<LibraryProps> = ({ songs }) => {
+export const Library: React.FC<LibraryProps> = ({ songs, playlists }) => {
+  const router = useRouter(); // Initialize useRouter
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
   const playlistModal = usePlaylistModal();
@@ -36,6 +39,11 @@ export const Library: React.FC<LibraryProps> = ({ songs }) => {
     }
 
     return playlistModal.onOpen();
+  };
+
+  // Function to handle playlist click
+  const handlePlaylistClick = (playlistId: string) => {
+    router.push(`/playlist/${playlistId}`); // Navigate to the playlist page
   };
 
   return (
@@ -63,8 +71,17 @@ export const Library: React.FC<LibraryProps> = ({ songs }) => {
         />
       </div>
       <div className="flex flex-col gap-y-2 mt-4 px-3">
-        {songs.map((item) => (
+        {/* {songs.map((item) => (
           <MediaItem onClick={(id: string) => onPlay(id)} key={item.id} data={item} />
+        ))} */}
+        {playlists.map((playlist) => (
+          <div
+            key={playlist.id}
+            onClick={() => handlePlaylistClick(playlist.id)}
+            className="cursor-pointer hover:text-white transition"
+          >
+            <p className="text-white">{playlist.name}</p>
+          </div>
         ))}
       </div>
     </div>

@@ -15,6 +15,15 @@ export interface Song {
   //BPM: number;
 }
 
+export interface Playlists {
+  id: string;
+  created_at: string;
+  description: string;
+  name: string;
+  user_id: string;
+  image_path: string;
+}
+
 export interface UserDetails {
   id: string;
   first_name: string;
