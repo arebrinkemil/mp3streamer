@@ -12,8 +12,8 @@ const Liked = async () => {
   return (
     <div
       className="
-        bg-neutral-900
-        rounded-lg
+        bg-[#EFEFEF]
+        
         h-full
         w-full
         overflow-hidden
@@ -54,7 +54,7 @@ const Liked = async () => {
               <p className="hidden md:block font-semibold text-sm">Playlist</p>
               <h1
                 className="
-                            text-white
+                            text-[#EFEFEF]
                             text-4xl
                             sm:text-5xl
                             lg:text-7xl

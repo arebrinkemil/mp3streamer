@@ -67,7 +67,7 @@ const PlaylistPage: React.FC<PlaylistPageProps> = ({ params }) => {
   }
 
   return (
-    <div className="text-white">
+    <div className="text-[#EFEFEF]">
       <h1>{playlist?.name}</h1>
       <ul>
         {songs.map((song) => (

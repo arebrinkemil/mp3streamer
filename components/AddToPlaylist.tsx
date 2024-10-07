@@ -75,7 +75,7 @@ export const AddToPlaylist: React.FC<AddToPlaylistProps> = ({ songId }) => {
       <Sheet>
         <SheetTrigger>
           <FaRegListAlt
-            className="text-neutral-400 cursor-pointer hover:text-white transition"
+            className="text-neutral-400 cursor-pointer hover:text-[#EFEFEF] transition"
             size={24}
           />{' '}
         </SheetTrigger>

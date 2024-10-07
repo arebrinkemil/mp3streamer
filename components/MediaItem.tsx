@@ -34,13 +34,13 @@ export const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         hover:bg-neutral-800/50
         w-full
         p-2
-        rounded-md
+        
         "
     >
       <div
         className="
             relative
-            rounded-md 
+             
             min-h-[48px]
             min-w-[48px]
             overflow-hidden
@@ -61,7 +61,7 @@ export const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
             overflow-hidden
             "
       >
-        <p className="text-white truncate">{data.title}</p>
+        <p className="text-[#EFEFEF] truncate">{data.title}</p>
         <p className="text-neutral-400 text-sm truncate">{data.author}</p>
       </div>
     </div>

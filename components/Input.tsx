@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           `first-letter:
         flex 
         w-full
-        rounded-md
+        
         bg-neutral-700
         border
         border-transparent

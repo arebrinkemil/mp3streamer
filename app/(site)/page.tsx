@@ -19,19 +19,19 @@ export default async function Home() {
   const songs = await getSongs();
 
   return (
-    <div className="bg-neutral-900 rounded-lg h-[inherit] w-full overflow-hidden overflow-y-hidden flex align-bottom">
+    <div className="bg-neutral-900  h-[inherit] w-full overflow-hidden overflow-y-hidden flex align-bottom">
       <Accordion type="single" defaultValue="item-1" className="w-full">
-        <AccordionItem className="bg-[#3f5efb] rounded-lg" value="item-1">
+        <AccordionItem className="bg-[#AD3E39] " value="item-1">
           <AccordionTrigger>
             {' '}
             <Header>
               <div className=""></div>
             </Header>
           </AccordionTrigger>
-          <AccordionContent className="pb-0 bg-[#eeeeee] rounded-lg">
+          <AccordionContent className="pb-0 bg-[#3E0D09] ">
             <div className="h-[calc(100vh-(366px+1rem))]">
               <div className="">
-                <h1 className="text-white text-3xl text-semibold">Welcome back</h1>
+                <h1 className="text-[#ad3e3a] text-6xl font-semibold">Playlists</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
                   <ListItem image="/images/liked.png" name="Liked Songs" href="liked" />
                 </div>
@@ -39,14 +39,16 @@ export default async function Home() {
             </div>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem className="bg-[#3f5efb] rounded-lg" value="item-2">
+        <AccordionItem className="bg-[#AD3E39] " value="item-2">
           <AccordionTrigger>
-            <div className="text-white h-[90px]">playlist</div>
+            <div className="text-[#EFEFEF] h-[90px] flex items-end">
+              <h1 className="text-6xl">All Music</h1>
+            </div>
           </AccordionTrigger>
-          <AccordionContent className="pb-0 bg-[#eeeeee] rounded-lg">
+          <AccordionContent className="pb-0 bg-[#3E0D09] ">
             <ScrollArea className="px-6 h-[calc(100vh-(366px+1rem))]">
               <div className="flex justify-between items-center">
-                <h1 className="text-white text-2xl font-semibold">Newest Songs</h1>
+                <h1 className="text-[#ad3e3a] text-6xl font-semibold">Newest Songs</h1>
               </div>
               <div>
                 <PageContent songs={songs} />
@@ -56,14 +58,11 @@ export default async function Home() {
             </ScrollArea>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem
-          className="bg-[radial-gradient(circle,_rgba(253,77,30,1)_0%,_rgba(63,94,251,1)_74%)] rounded-lg"
-          value="item-3"
-        >
+        <AccordionItem className="bg-[#0C1617] " value="item-3">
           <AccordionTrigger>
             <Player />
           </AccordionTrigger>
-          <AccordionContent className="pb-0 bg-[#eeeeee] rounded-lg">
+          <AccordionContent className="pb-0 bg-[#969897] ">
             <div className="h-[calc(100vh-(366px+1rem))]">
               <MusicContent songs={songs} />
             </div>

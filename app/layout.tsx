@@ -2,7 +2,7 @@ import { Sidebar } from '@/components/Sidebar';
 
 import './globals.css';
 
-import { Figtree } from 'next/font/google';
+import { Karla } from 'next/font/google';
 
 import { SupabaseProvider } from '@/providers/SupabaseProvider';
 import { UserProvider } from '@/providers/UserProvider';
@@ -13,7 +13,7 @@ import { getPlaylistsByUserId } from '@/actions/getPlaylistsByUserId';
 import { getSongsByUserId } from '@/actions/getSongsByUserId';
 import { Player } from '@/components/Player';
 
-const font = Figtree({ subsets: ['latin'] });
+const font = Karla({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Spotify Clone',

@@ -43,4 +43,4 @@ export const MusicInfo: React.FC<MusicInfoProps> = ({ song, songUrl }) => {
   );
 };
 
-//bg-gradient-to-l from-[#3f5efb] via-[#3f5efb]
+//bg-gradient-to-l from-[#3E0D09] via-[#3E0D09]

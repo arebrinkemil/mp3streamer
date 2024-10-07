@@ -6,10 +6,10 @@ export const PlayButton = () => {
       className="
         transition 
         opacity-0 
-        rounded-full 
+         
         flex 
         items-center
-      bg-green-500 
+      bg-[#EFEFEF]
         p-4
         drop-shadow-md
         translate 
