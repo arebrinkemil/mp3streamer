@@ -77,7 +77,6 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
   }, [sound]);
 
   const handlePlay = () => {
-    console.log('Playing');
     if (!isPlaying) {
       play();
     } else {
@@ -86,11 +85,7 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
   };
 
   const toggleMute = () => {
-    if (volume === 0) {
-      setVolume(1);
-    } else {
-      setVolume(0);
-    }
+    setVolume(volume === 0 ? 1 : 0);
   };
 
   return (
@@ -100,116 +95,63 @@ export const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) =
         grid-cols-2
         md:grid-cols-3
         h-full
+        bg-[#AD3E39]/5
+        rounded-lg
+        hover:bg-[#AD3E39]/20
+        transition
+        p-3
         "
     >
-      <div
-        className="
-            flex
-            w-full
-            justify-start
-            "
-      >
-        <div
-          className="
-                flex
-                items-center
-                gap-x-4
-                "
-        >
-          <MediaItem data={song} />
-          <LikeButton songId={song.id} />
-          <AddToPlaylist songId={song.id} />
-        </div>
+      <div className="flex w-full justify-start items-center gap-x-4">
+        <MediaItem data={song} />
+        <LikeButton songId={song.id} />
+        <AddToPlaylist songId={song.id} />
       </div>
 
-      <div
-        className="
-            flex
-            md:hidden
-            col-auto
-            w-full
-            justify-end
-            items-center
-            "
-      >
+      <div className="flex md:hidden col-auto w-full justify-end items-center">
         <div
           onClick={handlePlay}
           className="
-                
-                h-10
-                w-10
-                flex
-                items-center
-                justify-center
-                rounded-full
-                bg-white
-                p-1
-                cursor-pointer
-                "
+            h-10 w-10
+            flex items-center justify-center
+            rounded-full
+            bg-[#AD3E39]
+            p-1
+            cursor-pointer
+            "
         >
-          <Icon size={30} className="text-black" />
+          <Icon size={30} className="text-white" />
         </div>
       </div>
 
-      <div
-        className="
-            hidden
-            h-full
-            md:flex
-            justify-center
-            items-center
-            w-full
-            max-w-[722px]
-            gap-x-6
-            "
-      >
+      <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-6">
         <AiFillBackward
           onClick={onPlayPreviousSong}
           size={30}
-          className="
-                text-neutral-400
-                cursor-pointer
-                hover:text-white
-                transistion
-                "
+          className="text-neutral-400 cursor-pointer hover:text-[#EFEFEF] transition"
         />
         <div
           onClick={handlePlay}
           className="
-                flex
-                items-center
-                justify-center
-                h-10
-                w-10
-                rounded-full
-                bg-white
-                p-1
-                cursor-pointer
-                "
+            flex items-center justify-center
+            h-10 w-10
+            rounded-full
+            bg-[#AD3E39]
+            cursor-pointer
+            "
         >
-          <Icon size={30} className="text-black" />
+          <Icon size={30} className="text-white" />
         </div>
         <AiFillStepForward
           onClick={onPlayNextSong}
           size={30}
-          className="
-                text-neutral-400
-                cursor-pointer
-                hover:text-white
-                transition
-                "
+          className="text-neutral-400 cursor-pointer hover:text-[#EFEFEF] transition"
         />
       </div>
 
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
-          <VolumeIcon
-            onClick={toggleMute}
-            className="
-                cursor-pointer
-                "
-            size={34}
-          />
+          <VolumeIcon onClick={toggleMute} className="cursor-pointer text-[#AD3E39]" size={34} />
           <Slider value={volume} onChange={(value) => setVolume(value)} />
         </div>
       </div>
